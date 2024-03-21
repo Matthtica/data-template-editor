@@ -14,6 +14,7 @@ import { handleCommandNavigation } from "novel/extensions";
 import { defaultExtensions } from "./extensions";
 import React, { useState } from "react";
 
+
 interface NovelEditorProps extends React.HTMLAttributes<HTMLDivElement> { }
 export default function NovelEditor({ className }: NovelEditorProps) {
   const [content, setContent] = useState<JSONContent | undefined>();
