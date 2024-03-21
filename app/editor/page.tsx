@@ -1,7 +1,12 @@
 import NovelEditor from "@/components/editor";
+import Tiptap from "@/components/tiptap/tiptap";
+import { Button } from "@/components/ui/button";
 
 export default function EditorPage() {
-  return <div>
-    <NovelEditor className="p-2 m-3 border border-input min-h-80 rounded shadow-lg" />
+  return <div className="flex flex-col h-screen">
+    <Tiptap />
+    <div className="m-3 mt-0 flex justify-end">
+      <Button>Save</Button>
+    </div>
   </div>
 }
