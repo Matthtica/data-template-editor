@@ -5,7 +5,7 @@ interface TemplateItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export default function TemplateItem({ filename }: TemplateItemProps) {
-  return <div className="border border-input rounded-md bg-secondary p-2 px-3">
+  return <div className="transition-all duration-300 border border-input rounded-md p-2 px-3 hover:shadow-md">
     {filename}
   </div>
 }
