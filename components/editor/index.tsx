@@ -1,5 +1,4 @@
 "use client";
-
 import {
   EditorContent,
   EditorRoot,
@@ -15,9 +14,11 @@ import { defaultExtensions } from "./extensions";
 import React, { useState } from "react";
 
 
-interface NovelEditorProps extends React.HTMLAttributes<HTMLDivElement> { }
-export default function NovelEditor({ className }: NovelEditorProps) {
-  const [content, setContent] = useState<JSONContent | undefined>();
+interface NovelEditorProps extends React.HTMLAttributes<HTMLDivElement> {
+  content: JSONContent | undefined,
+  setContent: (content: JSONContent | undefined) => void
+}
+export default function NovelEditor({ className, content, setContent }: NovelEditorProps) {
   const [openNode, setOpenNode] = useState(false);
   const [openLink, setOpenLink] = useState(false);
   const [openColor, setOpenColor] = useState(false);
@@ -26,6 +27,7 @@ export default function NovelEditor({ className }: NovelEditorProps) {
     <EditorRoot>
       <EditorContent
         className={className}
+        autofocus={true}
         extensions={[...defaultExtensions]}
         initialContent={content}
         onUpdate={({ editor }) => {
