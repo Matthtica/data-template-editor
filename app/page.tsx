@@ -16,7 +16,7 @@ export default function Home() {
       let database = JSON.parse(stored_object);
       setNames(Object.keys(database));
     }
-  })
+  }, [])
 
   return <div className="mx-auto max-w-[40rem] flex flex-col">
     <div className="p-2 flex justify-between">
@@ -26,7 +26,7 @@ export default function Home() {
     <h1 className="text-2xl font-bold m-3">List of template</h1>
     <div className="border border-input rounded-md shadow-md min-h-40 p-3 gap-3">
       {names?.map((name) => {
-        return <TemplateItem filename={name}/>
+        return <TemplateItem key={name} filename={name}/>
       })}
     </div>
   </div>
