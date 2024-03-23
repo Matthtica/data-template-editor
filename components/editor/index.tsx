@@ -2,7 +2,6 @@
 import {
   EditorContent,
   EditorRoot,
-  JSONContent,
   EditorBubble,
 } from "novel";
 import { NodeSelector } from "./node-selector";
@@ -13,10 +12,9 @@ import { handleCommandNavigation } from "novel/extensions";
 import { defaultExtensions } from "./extensions";
 import React, { useState } from "react";
 
-
 interface NovelEditorProps extends React.HTMLAttributes<HTMLDivElement> {
-  content: JSONContent | undefined,
-  setContent: (content: JSONContent | undefined) => void
+  content?: string,
+  setContent: (content: string) => void
 }
 export default function NovelEditor({ className, content, setContent }: NovelEditorProps) {
   const [openNode, setOpenNode] = useState(false);
@@ -29,10 +27,10 @@ export default function NovelEditor({ className, content, setContent }: NovelEdi
         className={className}
         autofocus={true}
         extensions={[...defaultExtensions]}
-        initialContent={content}
+        initialContent={content ? JSON.parse(content) : undefined}
         onUpdate={({ editor }) => {
-          const json = editor.getJSON();
-          setContent(json);
+          const htmlstr = editor.getHTML();
+          setContent(htmlstr);
         }}
         editorProps={{
           handleDOMEvents: {
