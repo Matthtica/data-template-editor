@@ -13,8 +13,9 @@ export default function Home() {
   React.useEffect(() => {
     const stored_object = window.localStorage.getItem(DBNAME);
     if (stored_object) {
-      let database = JSON.parse(stored_object);
+      let database: TemplateMap = JSON.parse(stored_object);
       setNames(Object.keys(database));
+      setDb(database);
     }
   }, [])
 
@@ -24,7 +25,7 @@ export default function Home() {
       <LinkButton href="/editor">New Template</LinkButton>
     </div>
     <h1 className="text-2xl font-bold m-3">List of template</h1>
-    <div className="border border-input rounded-md shadow-md min-h-40 p-3 gap-3">
+    <div className="border border-input rounded-md shadow-md min-h-40 p-3 flex flex-col gap-3">
       {names?.map((name) => {
         return <TemplateItem key={name} filename={name}/>
       })}
