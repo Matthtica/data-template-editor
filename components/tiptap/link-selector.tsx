@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import { useEditor } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 import { Check, Trash } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { PopoverContent } from "@/components/ui/popover";
 
@@ -25,13 +25,13 @@ export function getUrlFromString(str: string) {
   }
 }
 interface LinkSelectorProps {
+  editor: Editor | null,
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export const LinkSelector = ({ open, onOpenChange }: LinkSelectorProps) => {
+export const LinkSelector = ({ editor, open, onOpenChange }: LinkSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const editor = useEditor();
 
   // Autofocus on input by default
   useEffect(() => {
