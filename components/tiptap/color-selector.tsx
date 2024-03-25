@@ -118,12 +118,26 @@ export function ColorSelector({ editor, open, onOpenChange }: ColorSelectorProps
         </span>
       </Button>
     </DropdownMenuTrigger>
-    <DropdownMenuContent>
+    <DropdownMenuContent sideOffset={5} align="start">
+      {TEXT_COLORS.map(({ name, color }, index) => {
+        return <DropdownMenuItem key={index}
+          onSelect={() => {
+            name !== "Default" && editor.chain().focus().setColor(color || "").run();
+          }}
+          className="flex items-center justify-between px-2 py-1 text-sm"
+        >
+        <div className='flex items-center gap-2'>
+          <div className='rounded-sm border px-2 py-px font-medium' style={{ color }}>
+            A
+          </div>
+          <span>{name}</span>
+        </div>
+        </DropdownMenuItem>
+      })}
       {HIGHLIGHT_COLORS.map(({ name, color }, index) => {
         return <DropdownMenuItem key={index}
           onSelect={() => {
-            editor.chain().focus().unsetHighlight().run();
-            name !== "Default" && editor.chain().focus().setHighlight({ color }).run();
+            name !== "Default" && editor.commands.setHighlight({ color });
           }}
         >
           <div
