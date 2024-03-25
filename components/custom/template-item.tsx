@@ -1,7 +1,8 @@
+'use client'
 import React from "react";
-import { Button } from "../ui/button";
 import {
   ArrowRightIcon,
+  Trash2Icon,
   Edit3Icon,
 } from "lucide-react";
 import {
@@ -10,14 +11,15 @@ import {
   TooltipTrigger,
   TooltipProvider
 } from "@/components/ui/tooltip";
+import LinkButton from "@/components/custom/link-button";
+import { Button } from "@/components/ui/button";
+import { deleteTemplate } from "@/lib/utils";
 
-interface TemplateItemProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TemplateItemProps {
   filename: string
 }
-
 export default function TemplateItem({ filename }: TemplateItemProps) {
-
-  return <div className="cursor-pointer transition-all duration-300 border border-input rounded-md p-2 px-3 hover:shadow-md flex justify-between items-center">
+  return <LinkButton href={`/editor/${filename}`} className="transition-all duration-300 flex justify-between items-center" variant="outline">
     <div>
       {filename}
     </div>
@@ -25,12 +27,12 @@ export default function TemplateItem({ filename }: TemplateItemProps) {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="ghost">
-              <Edit3Icon size="1.3rem" />
+            <Button variant="ghost" onClick={() => deleteTemplate(filename)}>
+              <Trash2Icon size="1.3rem"/>
             </Button>
           </TooltipTrigger>
           <TooltipContent className="bg-background border border-input text-primary">
-            Edit template
+            Delete template
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -38,9 +40,9 @@ export default function TemplateItem({ filename }: TemplateItemProps) {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="ghost">
+            <LinkButton href={`/fill-data/${filename}`} variant="ghost">
               <ArrowRightIcon size="1.3rem"/>
-            </Button>
+            </LinkButton>
           </TooltipTrigger>
           <TooltipContent className="bg-background border border-input text-primary">
             Fill data
@@ -48,5 +50,5 @@ export default function TemplateItem({ filename }: TemplateItemProps) {
         </Tooltip>
       </TooltipProvider>
     </div>
-  </div>
+  </LinkButton>
 }
