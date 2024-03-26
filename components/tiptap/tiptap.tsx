@@ -18,7 +18,7 @@ interface TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function Tiptap({ editor, className }: TiptapProps) {
   return <div className={className}>
     <EditorMenu editor={editor}/>
-    <EditorContent editor={editor}/>
+    <EditorContent editor={editor} className="p-4"/>
   </div>
 }
 
@@ -29,12 +29,11 @@ interface EditorMenuProps {
 function EditorMenu({ editor }: EditorMenuProps) {
   const [openNode, setOpenNode] = React.useState(false);
   const [openLink, setOpenLink] = React.useState(false);
-  const [openColor, setOpenColor] = React.useState(false);
+  // TODO: Need color picker
 
   return <div className="flex w-full bg-secondary">
     <NodeSelector editor={editor} open={openNode} onOpenChange={setOpenNode}/>
     <LinkSelector editor={editor} open={openLink} onOpenChange={setOpenLink}/>
     <TextButtons editor={editor}/>
-    <ColorSelector editor={editor} open={openColor} onOpenChange={setOpenColor}/>
   </div>
 }

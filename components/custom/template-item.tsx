@@ -3,7 +3,6 @@ import React from "react";
 import {
   ArrowRightIcon,
   Trash2Icon,
-  Edit3Icon,
 } from "lucide-react";
 import {
   Tooltip,
