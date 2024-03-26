@@ -14,7 +14,6 @@ interface FillDataPageRouteParams {
 }
 
 export default function FillDataPage({ params }: FillDataPageRouteParams) {
-  if (!params.template_name) return null;
   const stored_template = getTemplateByName(params.template_name);
   const variables = extractVariables(stored_template);
   const doc = new jsPDF();
