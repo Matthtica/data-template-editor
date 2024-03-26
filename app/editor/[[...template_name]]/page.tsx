@@ -18,7 +18,12 @@ export default function EditorPage({ params }: EditorPageRouteParams) {
 
   const editor = useEditor({
     extensions: [...defaultExtensions],
-    content: content ?? '<p>Hello World!</p>',
+    content: content ?? '<p>You can start typing here...</p>',
+    editorProps: {
+      attributes: {
+        class: "outline-none pl-6"
+      }
+    }
   });
 
   if (!editor) return;
