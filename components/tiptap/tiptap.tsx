@@ -31,7 +31,7 @@ function EditorMenu({ editor }: EditorMenuProps) {
   const [openLink, setOpenLink] = React.useState(false);
   // TODO: Need color picker
 
-  return <div className="flex w-full bg-secondary">
+  return <div className="flex w-full bg-secondary p-1">
     <NodeSelector editor={editor} open={openNode} onOpenChange={setOpenNode}/>
     <LinkSelector editor={editor} open={openLink} onOpenChange={setOpenLink}/>
     <TextButtons editor={editor}/>
