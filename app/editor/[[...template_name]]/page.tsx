@@ -6,6 +6,7 @@ import { defaultExtensions } from "@/components/tiptap/extensions";
 import { useEditor } from "@tiptap/react";
 import TemplateSaver from "./components/template-saver";
 import { getCurrentContent } from "@/lib/utils";
+import LinkButton from "@/components/custom/link-button";
 
 interface EditorPageRouteParams {
   params: {
@@ -30,7 +31,10 @@ export default function EditorPage({ params }: EditorPageRouteParams) {
   return <div className="flex flex-col h-screen p-3 gap-3 w-full items-center max-w-[55em] mx-auto">
     <div className="flex justify-between w-full">
       <ModeToggle variant="ghost"/>
-      <TemplateSaver editor={editor}/>
+      <div className="flex gap-3">
+        <LinkButton href="/" variant="outline">Back</LinkButton>
+        <TemplateSaver editor={editor}/>
+      </div>
     </div>
     <Tiptap editor={editor} className="w-full rounded-md border border-input min-h-[55rem]"/>
   </div>
