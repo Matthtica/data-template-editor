@@ -43,15 +43,14 @@ export function TextButtons({ editor }: TextButtonsProps) {
     },
   ];
 
-  return <div className='flex'>
+  return <div className='flex gap-1'>
       {items.map((item, index) => (
-        <Button key={index} size='icon' variant='ghost'
+        <Button key={index} size='icon' variant="ghost"
           onClick={() => item.command(editor)}
         >
           <item.icon
-            className={cn("h-4 w-4", {
-              "text-blue-500": item.isActive(editor),
-            })}
+            className="h-4 w-4"
+            strokeWidth={item.isActive(editor) ? "3px" : "1px"}
           />
         </Button>
       ))}
