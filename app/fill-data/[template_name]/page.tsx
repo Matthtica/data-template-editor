@@ -37,7 +37,7 @@ export default function FillDataPage({ params }: FillDataPageRouteParams) {
   return <div className="flex h-screen p-2 gap-2 portrait:flex-col" >
     <div id="content" dangerouslySetInnerHTML={{ __html: content}} className="flex-1 rounded-md border border-input p-2">
     </div>
-    <div className="flex-1 rounded-md border border-input p-2 flex flex-col justify-between">
+    <div className="flex-2 rounded-md border border-input p-2 flex flex-col justify-between">
       <DynamicInputList
         className=""
         variables={variables}
