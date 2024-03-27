@@ -3,8 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "next-themes";
+import {
+  QueryClient,
+  QueryClientProvider
+} from "@tanstack/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -18,10 +23,12 @@ export default function RootLayout({
         defaultTheme="dark"
         enableSystem
       >
-        <body className={inter.className}>
-          {children}
-          <Toaster />
-        </body>
+        <QueryClientProvider client={queryClient}>
+          <body className={inter.className}>
+            {children}
+            <Toaster />
+          </body>
+        </QueryClientProvider>
       </ThemeProvider>
     </html>
   );
