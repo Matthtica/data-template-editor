@@ -4,8 +4,14 @@ import React from "react";
 import DynamicInputList from "./components/dynamic-input-list";
 import { DataMap } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { jsPDF } from "jspdf";
 import LinkButton from "@/components/custom/link-button";
+import { PrinterChooser } from "./components/printer-chooser";
+
+interface PrintRequest {
+  printer_name: string,
+  name: string,
+  content: string
+}
 
 interface FillDataPageRouteParams {
   params: {
@@ -16,11 +22,11 @@ interface FillDataPageRouteParams {
 export default function FillDataPage({ params }: FillDataPageRouteParams) {
   const stored_template = getTemplateByName(params.template_name);
   const variables = extractVariables(stored_template);
-  const doc = new jsPDF();
 
   const [content, setContent] = React.useState(stored_template);
   const [data, setData] = React.useState<DataMap>({});
 
+  const [currentPrinter, setCurrentPrinter] = React.useState("");
 
   const handleInputChange = (variable: string, value: string) => {
     let tempdata = data;
@@ -30,8 +36,20 @@ export default function FillDataPage({ params }: FillDataPageRouteParams) {
     setContent(filledTemplate);
   }
 
-  const saveAsPdf = () => {
-    doc.html(content).save(params.template_name + ".pdf");
+  const sendPrintRequest = async () => {
+    let body: PrintRequest = {
+      printer_name: "EPSON L360 Series",
+      name: params.template_name,
+      content
+    }
+
+    await fetch("localhost:4590/print", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((res) => console.log(res));
   }
 
   return <div className="flex h-screen p-2 gap-2 portrait:flex-col" >
@@ -43,9 +61,10 @@ export default function FillDataPage({ params }: FillDataPageRouteParams) {
         variables={variables}
         data={data}
         onInputChange={handleInputChange}/>
+      <PrinterChooser value={currentPrinter} setValue={setCurrentPrinter}/>
       <div className="flex justify-end gap-2">
         <LinkButton href="/" variant="outline">Back</LinkButton>
-        <Button onClick={saveAsPdf}>Save</Button>
+        <Button onClick={sendPrintRequest}>Print</Button>
       </div>
     </div>
   </div>
