@@ -13,7 +13,7 @@ export default function Home() {
       <ModeToggle variant="ghost" />
       <LinkButton href="/editor">New Template</LinkButton>
     </div>
-    <h1 className="text-2xl font-bold m-3">List of template</h1>
+    <h1 className="text-2xl font-bold m-3">Here is list of template</h1>
     <div className="rounded-md shadow-lg min-h-40 p-3 flex flex-col gap-3">
       {templates.map((template) => {
         return <TemplateItem key={template.id} template={template}/>
