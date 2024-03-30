@@ -7,6 +7,7 @@ import { useEditor } from "@tiptap/react";
 import TemplateSaver from "@/components/custom/template-saver";
 import LinkButton from "@/components/custom/link-button";
 import { useTemplateStorageContext } from "@/context/TemplateStorageContext";
+import { DEFAULT_CONTENT } from "@/lib/constants";
 
 interface EditorPageRouteParams {
   params: {
@@ -16,7 +17,7 @@ interface EditorPageRouteParams {
 
 export default function EditorPage({ params }: EditorPageRouteParams) {
   const { getTemplate } = useTemplateStorageContext();
-  let content = '<p>You can start typing here...</p>';
+  let content = DEFAULT_CONTENT;
   if (params.id) {
     content = getTemplate(params.id[0])?.content ?? content;
   }
