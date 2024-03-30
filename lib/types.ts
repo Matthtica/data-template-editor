@@ -1,5 +1,7 @@
-export interface TemplateMap {
-  [key: string]: string
+export interface Template {
+  id: string,
+  name: string,
+  content: string
 }
 
 export interface DataMap {
