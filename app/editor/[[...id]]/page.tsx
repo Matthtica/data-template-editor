@@ -4,22 +4,26 @@ import Tiptap from "@/components/tiptap/tiptap";
 import ModeToggle from "@/components/custom/mode-toggle";
 import { defaultExtensions } from "@/components/tiptap/extensions";
 import { useEditor } from "@tiptap/react";
-import TemplateSaver from "./components/template-saver";
-import { getCurrentContent } from "@/lib/utils";
+import TemplateSaver from "@/components/custom/template-saver";
 import LinkButton from "@/components/custom/link-button";
+import { useTemplateStorageContext } from "@/context/TemplateStorageContext";
 
 interface EditorPageRouteParams {
   params: {
-    template_name?: string[]
+    id?: string[]
   }
 }
 
 export default function EditorPage({ params }: EditorPageRouteParams) {
-  const content = getCurrentContent({ params });
+  const { getTemplate } = useTemplateStorageContext();
+  let content = '<p>You can start typing here...</p>';
+  if (params.id) {
+    content = getTemplate(params.id[0])?.content ?? content;
+  }
 
   const editor = useEditor({
     extensions: [...defaultExtensions],
-    content: content ?? '<p>You can start typing here...</p>',
+    content: content,
     editorProps: {
       attributes: {
         class: "outline-none pl-6"
@@ -33,7 +37,7 @@ export default function EditorPage({ params }: EditorPageRouteParams) {
       <ModeToggle variant="ghost"/>
       <div className="flex gap-3">
         <LinkButton href="/" variant="outline">Back</LinkButton>
-        <TemplateSaver editor={editor}/>
+        <TemplateSaver id={params.id?.[0]} editor={editor}/>
       </div>
     </div>
     <Tiptap editor={editor} className="w-full rounded-md border border-input min-h-[55rem]"/>
