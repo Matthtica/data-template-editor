@@ -16,7 +16,7 @@ export default function Home() {
     <h1 className="text-2xl font-bold m-3">List of template</h1>
     <div className="rounded-md shadow-lg min-h-40 p-3 flex flex-col gap-3">
       {templates.map((template) => {
-        return <TemplateItem template={template}/>
+        return <TemplateItem key={template.id} template={template}/>
       })}
     </div>
   </div>
