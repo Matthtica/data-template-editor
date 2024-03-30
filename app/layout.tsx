@@ -7,6 +7,7 @@ import {
   QueryClient,
   QueryClientProvider
 } from "@tanstack/react-query";
+import { TemplateStorageProvider } from "@/context/TemplateStorageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const queryClient = new QueryClient();
@@ -23,12 +24,14 @@ export default function RootLayout({
         defaultTheme="dark"
         enableSystem
       >
-        <QueryClientProvider client={queryClient}>
-          <body className={inter.className}>
-            {children}
-            <Toaster />
-          </body>
-        </QueryClientProvider>
+        <body className={inter.className}>
+          <QueryClientProvider client={queryClient}>
+            <TemplateStorageProvider>
+              {children}
+            </TemplateStorageProvider>
+          </QueryClientProvider>
+          <Toaster />
+        </body>
       </ThemeProvider>
     </html>
   );
