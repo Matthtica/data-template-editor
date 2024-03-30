@@ -16,9 +16,8 @@ interface FillDataPageRouteParams {
 export default function FillDataPage({ params }: FillDataPageRouteParams) {
   const { getTemplate } = useTemplateStorageContext();
   const current_template = getTemplate(params.id);
-  if (!current_template) return <div>No template found</div>;
-  const variables = extractVariables(current_template.content);
-  const { content, data, handleInputChange } = useTemplateInputData(current_template.content);
+  const variables = extractVariables(current_template!.content);
+  const { content, data, handleInputChange } = useTemplateInputData(current_template!.content);
 
   const sendPrintRequest = async () => {
     console.log("Printing is not implemented yet")
